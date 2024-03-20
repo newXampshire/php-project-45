@@ -1,0 +1,13 @@
+{
+    "name": "hexlet/code",
+    "description": "mind games",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "New Xampshire",
+            "email": "gun19sinking@ya.ru"
+        }
+    ],
+    "require": {}
+}
