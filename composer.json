@@ -9,5 +9,8 @@
             "email": "gun19sinking@ya.ru"
         }
     ],
+    "bin": [
+        "bin/brain-games"
+    ],
     "require": {}
 }
