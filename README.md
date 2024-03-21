@@ -11,3 +11,6 @@ https://asciinema.org/a/FPVh5BJYriuucHF9wmnie9KvC
 
 #### Gcd game
 https://asciinema.org/a/YD9OKtUdPZ9P0mqlGPdmCt4Pn
+
+#### Progression game
+https://asciinema.org/a/wukNRYyjrq4hem7ajxPtKK8v3

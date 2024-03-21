@@ -12,17 +12,17 @@ use function BrainGames\Cli\processSuccess;
 use function cli\line;
 use function cli\prompt;
 
-function calcGame(): void
+function progressionGame(): void
 {
     hello();
 
-    line('What is the result of the expression?');
+    line('What number is missing in the progression?');
 
     $attempts = 0;
     while ($attempts < nbOfAttempts()) {
-        [$expression, $expectedAnswer] = getExpressionData();
+        [$progression, $expectedAnswer] = getProgressionData();
 
-        $answer = prompt("Question: $expression");
+        $answer = prompt("Question: $progression");
         line("Your answer: %s", $answer);
 
         if ($answer !== $expectedAnswer) {
@@ -38,29 +38,22 @@ function calcGame(): void
     bye();
 }
 
-function getExpressionData(): array
+function getProgressionData(): array
 {
-    $result = 0;
+    $step = rand(1, 4);
 
-    $a = rand(1, 100);
-    $b = rand(1, 100);
-
-    $operators = ['+', '-', '*'];
-    $operator = $operators[array_rand($operators)];
-    switch ($operator) {
-        case '+':
-            $result = $a + $b;
-            break;
-        case '-':
-            $result = $a - $b;
-            break;
-        case '*':
-            $result = $a * $b;
-            break;
+    $progression = [];
+    for ($i = 0, $a = rand(1, 10); $i < 10; $i++, $a += $step) {
+        $progression[] = $a;
     }
 
+    $randKey = array_rand($progression);
+
+    $answer = $progression[$randKey];
+    $progression[$randKey] = '..';
+
     return [
-        "$a $operator $b",
-        (string)$result
+        implode(' ', $progression),
+        (string)$answer
     ];
 }
