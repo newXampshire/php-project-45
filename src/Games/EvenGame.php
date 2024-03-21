@@ -2,20 +2,24 @@
 
 declare(strict_types=1);
 
-namespace BrainGames\Cli;
+namespace BrainGames\Games\Cli;
 
+use function BrainGames\Cli\bye;
+use function BrainGames\Cli\hello;
+use function BrainGames\Cli\nbOfAttempts;
+use function BrainGames\Cli\processError;
+use function BrainGames\Cli\processSuccess;
 use function cli\line;
 use function cli\prompt;
 
 function evenGame(): void
 {
-    line('Welcome to the Brain Game!');
-    $name = prompt('May I have your name?');
-    line("Hello, $name!");
+    hello();
+
     line('Answer "yes" if the number is even, otherwise answer "no".');
 
     $attempts = 0;
-    while ($attempts < 3) {
+    while ($attempts < nbOfAttempts()) {
         $number = rand(1, 100);
         $expectedAnswer = $number % 2 === 0 ? 'yes' : 'no';
 
@@ -23,15 +27,14 @@ function evenGame(): void
         line("Your answer: %s", $answer);
 
         if ($answer !== $expectedAnswer) {
-            line("'$answer' is wrong answer ;(. Correct answer was '$expectedAnswer'");
-            line("Let's try again, $name!");
+            processError($answer, $expectedAnswer);
 
             return;
         }
 
-        line('Correct!');
+        processSuccess();
         $attempts++;
     }
 
-    line("Congratulations, $name!");
+    bye();
 }
