@@ -4,38 +4,16 @@ declare(strict_types=1);
 
 namespace BrainGames\Games\Cli;
 
-use function BrainGames\Cli\bye;
-use function BrainGames\Cli\hello;
-use function BrainGames\Cli\nbOfAttempts;
-use function BrainGames\Cli\processError;
-use function BrainGames\Cli\processSuccess;
-use function cli\line;
-use function cli\prompt;
+use function BrainGames\Cli\runGame;
 
 function calcGame(): void
 {
-    hello();
-
-    line('What is the result of the expression?');
-
-    $attempts = 0;
-    while ($attempts < nbOfAttempts()) {
-        [$expression, $expectedAnswer] = getExpressionData();
-
-        $answer = prompt("Question: $expression");
-        line("Your answer: %s", $answer);
-
-        if ($answer !== $expectedAnswer) {
-            processError($answer, $expectedAnswer);
-
-            return;
-        }
-
-        processSuccess();
-        $attempts++;
-    }
-
-    bye();
+    runGame(
+        game: function (): array {
+            return getExpressionData();
+        },
+        rules: 'What is the result of the expression?'
+    );
 }
 
 function getExpressionData(): array
